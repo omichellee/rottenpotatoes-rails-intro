@@ -5,7 +5,7 @@ class Movie < ActiveRecord::Base
   end
   
   def self.with_ratings(ratings)
-    ratings.nil ? Movie.all : Movie.where(rating: ratings)
+    ratings.nil? ? Movie.all : Movie.where(rating: ratings)
   end
 
 end
