@@ -18,14 +18,12 @@ class MoviesController < ApplicationController
       if params[:ratings]
         @movies = Movie.with_ratings(params[:ratings].keys)
         @ratings_to_show = params[:ratings].keys
-      else
-        if session[:ratings]
-          redirect_to movies_path(:ratings => session[:ratings])
+      elsif session[:ratings]
+        redirect_to movies_path(:ratings => session[:ratings])
         #session[:ratings] = params[:ratings]
-        else
-          @movies = Movie.all
-          @ratings_to_show = []
-        end
+      else
+        @movies = Movie.all
+        @ratings_to_show = []
       end
 
       if params[:sort]
@@ -37,12 +35,10 @@ class MoviesController < ApplicationController
           @date_release = "p-3 mb-2 bg-primary text-white"
           @movies = Movie.order(:release_date)
         end
+      elsif session[:sort]
+        redirect_to movies_path(:sort => session[:sort])
       else
-        if session[:sort]
-          redirect_to movies_path(:sort => session[:sort])
-        else
-          session[:sort] = params[:sort]
-        end
+        session[:sort] = params[:sort]
       end
       
     end
