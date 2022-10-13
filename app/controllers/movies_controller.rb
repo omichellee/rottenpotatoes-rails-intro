@@ -20,6 +20,7 @@ class MoviesController < ApplicationController
         @movies = Movie.order("title ASC")
       elsif sort == "date"
         @movies = Movie.order(:release_date)
+      else
       end
       
     end
